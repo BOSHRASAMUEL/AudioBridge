@@ -1,0 +1,14 @@
+# Android
+android-app/.gradle/
+android-app/build/
+android-app/app/build/
+android-app/local.properties
+android-app/.idea/
+*.apk
+*.aab
+
+# Windows
+windows-server/bin/
+windows-server/obj/
+*.exe
+.vs/

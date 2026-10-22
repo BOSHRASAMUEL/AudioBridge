@@ -1,0 +1,156 @@
+﻿<Window x:Class="AudioStreamerPC.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AudioBridge Server" Height="700" Width="480"
+        Background="#0F171E" WindowStartupLocation="CenterScreen"
+        Icon="icon.ico"
+        FontFamily="Segoe UI">
+    
+    <Window.Resources>
+        <!-- ستايل النصوص -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+        </Style>
+        
+        <!-- ستايل الأزرار -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2D9CDB"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- ستايل الكروت -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#1A2634"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="10" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock Text="AudioBridge" FontSize="28" FontWeight="Bold" Foreground="#62C0CE"/>
+            <TextBlock Text="Stream PC audio to your phone" FontSize="14" Foreground="#8DA5AE" Margin="0,4,0,0"/>
+        </StackPanel>
+        
+        <!-- Status Card -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="16">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Ellipse x:Name="StatusIndicator" Width="14" Height="14" Fill="#D32F2F" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                <TextBlock x:Name="StatusText" Text="Waiting for connection..." FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Client Info Card -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <StackPanel>
+                <TextBlock Text="CONNECTED DEVICE" FontSize="12" Foreground="#8DA5AE" FontWeight="Bold" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal">
+                    <Path Data="M17,1H7C5.9,1 5,1.9 5,3V21C5,22.1 5.9,23 7,23H17C18.1,23 19,22.1 19,21V3C19,1.9 18.1,1 17,1M17,19H7V5H17V19Z" Fill="#62C0CE" Stretch="Uniform" Width="24" Height="24" Margin="0,0,12,0"/>
+                    <TextBlock x:Name="DeviceNameText" Text="None" FontSize="18" FontWeight="Bold" Foreground="#FFFFFF" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- App Exclusion Card -->
+        <Border Grid.Row="3" Style="{StaticResource CardStyle}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+                    <TextBlock Text="AUDIO ROUTING" FontSize="12" Foreground="#8DA5AE" FontWeight="Bold"/>
+                    <TextBlock Text="Mute apps to exclude them from the stream" FontSize="13" Foreground="#FFFFFF" Margin="0,4,0,0"/>
+                </StackPanel>
+                
+                <Grid DockPanel.Dock="Bottom" Margin="0,16,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="Refresh Apps" Click="RefreshApps_Click" Margin="0,0,8,0" Background="#2D9CDB"/>
+                    <Button Grid.Column="1" Content="Force Disconnect" Click="ForceDisconnect_Click" Margin="8,0,0,0" Background="#EB5757"/>
+                </Grid>
+                
+                <ListBox x:Name="AppsListBox" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="#243447"/>
+                            <Setter Property="Margin" Value="0,0,0,8"/>
+                            <Setter Property="Padding" Value="12,8"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Background="{TemplateBinding Background}" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding DisplayName}" Foreground="#FFFFFF" FontSize="14" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                
+                                <!-- المربع الجديد (شيك وواضح) -->
+                                <CheckBox Grid.Column="1" IsChecked="{Binding IsMuted, Mode=TwoWay}" Checked="AppMute_Changed" Unchecked="AppMute_Changed" VerticalAlignment="Center">
+                                    <CheckBox.Template>
+                                        <ControlTemplate TargetType="CheckBox">
+                                            <Border x:Name="border" Width="22" Height="22" CornerRadius="4" BorderThickness="2" BorderBrush="#62C0CE" Background="Transparent">
+                                                <Path x:Name="checkMark" Data="M 0 5 L 4 9 L 12 0" Stroke="#62C0CE" StrokeThickness="2" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="checkMark" Property="Visibility" Value="Visible"/>
+                                                    <Setter TargetName="border" Property="Background" Value="#1A2B34"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="BorderBrush" Value="#FFFFFF"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </CheckBox.Template>
+                                </CheckBox>
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

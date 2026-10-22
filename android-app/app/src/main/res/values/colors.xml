@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ألوان التطبيق الأساسية -->
+    <color name="bg_main">#1A2B34</color>
+    <color name="bg_card">#233A44</color>
+    <color name="accent_mint">#62C0CE</color>
+    <color name="text_main">#FFFFFF</color>
+    <color name="text_sub">#8DA5AE</color>
+
+    <!-- لون خلفية الأيقونة (ضروري عشان الأندرويد ميعملش إيرور) -->
+    <color name="ic_launcher_background">#1A2B34</color>
+</resources>
