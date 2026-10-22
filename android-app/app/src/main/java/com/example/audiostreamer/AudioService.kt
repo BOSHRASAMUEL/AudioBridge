@@ -68,8 +68,9 @@ class AudioService : Service() {
         val stopIntent = Intent(this, NotificationActionReceiver::class.java).apply { action = "ACTION_STOP_FROM_NOTIFICATION" }
         val stopPendingIntent = PendingIntent.getBroadcast(this, 1, stopIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
+        // غيرنا اسم الإشعار هنا لـ AudioBridge
         val notification = NotificationCompat.Builder(this, channelId)
-            .setContentTitle("Audio Streamer")
+            .setContentTitle("AudioBridge")
             .setContentText("Streaming audio from $ipAddress")
             .setSmallIcon(android.R.drawable.ic_media_play)
             .setContentIntent(contentIntent)
@@ -130,26 +131,14 @@ class AudioService : Service() {
                         val receiveBuffer = ByteArray(8192)
                         val receivePacket = DatagramPacket(receiveBuffer, receiveBuffer.size)
                         socket.soTimeout = 5000
-                        var lastPacketTime = System.currentTimeMillis()
-                        
                         while (isActive && isStreaming) {
                             try {
                                 socket.receive(receivePacket)
-                                lastPacketTime = System.currentTimeMillis() // جات نبضة أو صوت
-                                
                                 val data = receivePacket.data.copyOf(receivePacket.length)
-                                
-                                // لو الحزمة كبيرة (فيها صوت فعلاً) ضيفها للطابور
-                                if (data.size > 4) { 
-                                    if (packetQueue.size < 100) { 
-                                        packetQueue.put(data)
-                                    }
+                                if (packetQueue.size < 100) { 
+                                    packetQueue.put(data)
                                 }
                             } catch (e: SocketTimeoutException) {
-                                // لو عدت 7 ثواني من غير أي حزمة (ولا حتى نبضة)، يبقى السيرفر قفل
-                                if (System.currentTimeMillis() - lastPacketTime > 7000) {
-                                    throw Exception("Server disconnected (Timeout)")
-                                }
                             } catch (e: Exception) {
                                 if (isActive && isStreaming) throw e
                             }
@@ -197,7 +186,7 @@ class AudioService : Service() {
 
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    updateStatus("Disconnected. Reconnecting...")
+                    updateStatus("Reconnecting...")
                 } finally {
                     try { localAudioTrack?.stop() } catch (e: Exception) {}
                     try { localAudioTrack?.release() } catch (e: Exception) {}
