@@ -28,8 +28,8 @@ You do not need to build the code to use this app! Go to the **[Releases](../../
 This project is licensed under the MIT License.
 
 
+<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/0c5ee5d8-8338-4d4e-9d2a-c9bde8953493" />
 
-<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/726038b6-d5b0-48fd-9d6c-c831de5cbfb7" />
 
 
 
