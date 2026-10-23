@@ -27,13 +27,9 @@ You do not need to build the code to use this app! Go to the **[Releases](../../
 ## 📄 License
 This project is licensed under the MIT License.
 
-
-<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/0c5ee5d8-8338-4d4e-9d2a-c9bde8953493" />
-
-
-
-
-<img width="591" height="1212" alt="123" src="https://github.com/user-attachments/assets/1aa75b53-1196-4a9b-9f58-43147990cf44" />
+| Windows Server | Android App |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/0c5ee5d8-8338-404e-9d2a-c9bde8953493" width="380" /> | <img src="https://github.com/user-attachments/assets/1aa75b53-1196-4a9b-9f58-41147909cf44" width="220" /> |
 
 
 
