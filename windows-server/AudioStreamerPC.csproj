@@ -6,13 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>
+    <!-- السطر ده اللي بيغير اسم ملف الـ exe لـ AudioBridge-Server -->
+    <AssemblyName>AudioBridge-Server</AssemblyName>
+    <RootNamespace>AudioStreamerPC</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="NAudio.Wasapi" Version="3.1.1-preview.2" />
   </ItemGroup>
 
-  <!-- السطرين دول عشان ننسخ الأيقونة لمجلد التشغيل عشان النافذة تعرف تقراها -->
   <ItemGroup>
     <Content Include="icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
