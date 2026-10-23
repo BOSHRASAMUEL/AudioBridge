@@ -2,11 +2,6 @@
 
 A low-latency, open-source solution to stream system audio from a Windows PC to an Android device over Wi-Fi.
 
-## 📸 Screenshots
-| Windows Server | Android App |
-| :---: | :---: |
-| <img src="<img width="591" height="1212" alt="123" src="https://github.com/user-attachments/assets/688f7249-c882-4298-acac-b00e63eb1747" />" width="380" /> | <img src="<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/6fe46467-7adc-4ba9-826d-0a831376613d" />" width="220" /> |
-
 ## ⬇️ Download (For Users)
 You do not need to build the code to use this app! Go to the **[Releases](../../releases)** tab on the right side of this page and download the latest version:
 - **`app-release.apk`**: Install this on your Android device.
@@ -42,3 +37,7 @@ You do not need to build the code to use this app! Go to the **[Releases](../../
 ## 📄 License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## 📸 Screenshots
+| Windows Server | Android App |
+| :---: | :---: |
+| <img src="<img width="591" height="1212" alt="123" src="https://github.com/user-attachments/assets/688f7249-c882-4298-acac-b00e63eb1747" />" width="380" /> | <img src="<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/6fe46467-7adc-4ba9-826d-0a831376613d" />" width="220" /> |
