@@ -26,6 +26,14 @@ You do not need to build the code to use this app! Go to the **[Releases](../../
 
 ## 📄 License
 This project is licensed under the MIT License.
-<img width="466" height="693" alt="Screenshot 2026-10-23 110704" src="https://github.com/user-attachments/assets/5285df11-884f-42d0-8501-f1ff5d7389ce" />
-<img width="591" height="1212" alt="123" src="https://github.com/user-attachments/assets/57ccfa2e-64d8-48e4-9684-404fcae48bd2" />
+
+
+
+<img width="463" height="660" alt="3131" src="https://github.com/user-attachments/assets/726038b6-d5b0-48fd-9d6c-c831de5cbfb7" />
+
+
+
+<img width="591" height="1212" alt="123" src="https://github.com/user-attachments/assets/1aa75b53-1196-4a9b-9f58-43147990cf44" />
+
+
 
